@@ -7,27 +7,24 @@ const SidebarButton = ({ label, ...rest }) => (
     {({ hover }) => (
       <Box
       >
-        <Text size="large" color={hover? 'dark-1' : 'dark-2'}>{label}</Text>
+        <Text size="large" color={hover ? 'dark-1' : 'dark-2'}>{label}</Text>
       </Box>
     )}
   </Button>
 );
 
-const SidebarNav = () => {
+export const SidebarNav = () => {
   const [active, setActive] = useState();
   return (
-
-        <Nav>
-          {['Dashboard', 'Devices', 'Settings'].map(label => (
-            <SidebarButton
-              key={label}
-              label={label}
-              active={label === active}
-              onClick={() => setActive(label)}
-            />
-          ))}
-        </Nav>
+    <Nav>
+      {['Tools', 'Log'].map(label => (
+        <SidebarButton
+          key={label}
+          label={label}
+          active={label === active}
+          onClick={() => setActive(label)}
+        />
+      ))}
+    </Nav>
   );
 };
-
-export const Sidebar = () => <SidebarNav />;

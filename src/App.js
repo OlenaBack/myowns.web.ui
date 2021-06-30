@@ -11,7 +11,7 @@ import {
 import { FormClose, Menu} from 'grommet-icons';
 import { Items } from './pages/Items';
 import { grommet } from 'grommet/themes';
-import { Sidebar } from './components/navigation';
+import { CollapsedSidebar, Sidebar } from './components/SideBar.jsx';
 
 const AppBar = (props) => (
   <Box
@@ -39,8 +39,7 @@ class App extends Component {
           {size => (
             <Box fill>
               <AppBar>
-                <Heading level='3' margin='none' color>My Owns</Heading>
-              
+                <Heading level='3' margin='none' color>My Owns</Heading>              
                 <Button
                   icon={<Menu />}
                   onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
@@ -51,45 +50,10 @@ class App extends Component {
                 <Items/>
                 </Box>
                 {(!showSidebar || size !== 'small') ? (
-                  <Collapsible direction="horizontal" open={showSidebar}>
-                    <Box
-                      flex
-                      width='medium'
-                      background='light-2'
-                      elevation='small'
-                      align='center'
-                      justify='center'
-                    >
-                                        <Sidebar />                                    
-
-                    </Box>
-                  </Collapsible>
-                ): (
-                  <Layer>
-                    <Box
-                      background='light-2'
-                      tag='header'
-                      justify='end'
-                      align='center'
-                      direction='row'
-                                        >
-                                           
-                      <Button
-                        icon={<FormClose />}
-                        onClick={() => this.setState({ showSidebar: false })}
-                      />
-                    </Box>
-                    <Box
-                      fill
-                      background='light-2'
-                      align='center'
-                      justify='center'
-                    >
-                                            
-                                            
-                    </Box>
-                  </Layer>
-                )}
+                 <Sidebar showSidebar={this.state.showSidebar}/>
+                ): 
+    <CollapsedSidebar onClose ={() => this.setState({ showSidebar: false })}/>
+                }
               </Box>
             </Box>
           )}
